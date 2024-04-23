@@ -1,42 +1,94 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Platypi", serif;
+}
+.container{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+
+}
+.left--container{
+  width: 20%;
+  height:700px;
+  display: flex;
+  border-right: .5px solid rgb(189, 195, 199);
+
+}
+.right--container{
+  width: 80%;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+ 
+
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.trash{
+  width: 20px;
+  height: 20px;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+.header{
+  padding:18px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-bottom: .5px solid rgb(189, 195, 199); ;
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.dashboard--header{
+   justify-content: end;
+}
+.right--header{
+  justify-content: start;
+  column-gap: 60px;
+}
+.note__pad--icon{
+  width: 20px;
+  height: 20px;
+
+}
+.select--input{
+  height: 22px;
+  border-radius: 8px;
+ box-shadow: .5px .5px 8px rgb(189, 195, 199) ;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.list--info{
+  display: flex;
+  column-gap: 40px;
+
+}
+.completed--info,.all--info,.open--info{
+  font-size: 12px;
+  
+}
+.count--list{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: gray;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.item--info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.text--input{
+  height: 100%;
+  width: 100%;
+  border: .5px solid  rgb(189, 195, 199);
+  padding-bottom: 580px;
+  padding-left: 20px;
+  word-wrap: break-word;
+  word-break: break-word;
 }

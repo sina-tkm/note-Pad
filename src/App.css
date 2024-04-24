@@ -1,9 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Platypi:ital,wght@0,300..800;1,300..800&display=swap');
-*{
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');*{
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Platypi", serif;
+  font-family: "Noto Sans", sans-serif;
 }
 .container{
   width: 100%;
@@ -18,6 +17,18 @@
   height:700px;
   display: flex;
   border-right: .5px solid rgb(189, 195, 199);
+  flex-direction: column;
+
+}
+.storage--block{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-top: 8px;
+  row-gap: 4px;
 
 }
 .right--container{
@@ -34,7 +45,7 @@
   height: 20px;
 }
 .header{
-  padding:18px;
+  padding:22px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -91,4 +102,17 @@
   padding-left: 20px;
   word-wrap: break-word;
   word-break: break-word;
+}
+.text--block{
+  width: 90%;
+  height: 80px;
+  border-radius: 10px;
+  display: flex;
+  background-color: rgb(220, 221, 225)
+}
+.title--input{
+  width: 100%;
+  border: .5px solid  rgb(189, 195, 199);
+  height: 30px;
+  padding-left: 20px;
 }

@@ -1,5 +1,5 @@
 import "./app.css"
-import StyleNote from "./Styles"
+import StyleNote from "./components/Styles"
 
 function App(){
     return (

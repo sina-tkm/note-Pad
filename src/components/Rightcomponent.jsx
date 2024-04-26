@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import NotePad from '../component-icon/note-icon.svg'
 import StatusBar from './StatusBar';
+import SortHeader from './sortHeader';
 
 
-function Rightcomponent({onAddNote,noteStore}) {
+function Rightcomponent({onAddNote,noteStore,sortBy,onSort}) {
     const [title,setTitle] = useState("");
     const [description,setDescription]=useState("")
     
@@ -29,17 +30,11 @@ function Rightcomponent({onAddNote,noteStore}) {
     <div className="right--container">
     <div className="header right--header">
         <img src={NotePad}  alt="NotePad" className="note__pad--icon" onClick={handleClick}/>
-        <div className="sort sort--input">
-         <select name="" id="" className="select--input">
-            <option value="">sort base on latest</option>
-            <option value="">sort base on earliest</option>
-            <option value="">sort base on completed</option>
-         </select>
-        </div>
+      <SortHeader  sortBy={sortBy} onSort={onSort}/>
       <StatusBar noteStore= {noteStore}/>
 
-    </div>
-         <form> 
+      </div>
+       <form> 
          <input
          value={title}
          onChange={(e)=>{setTitle(e.target.value)}}
@@ -52,9 +47,7 @@ function Rightcomponent({onAddNote,noteStore}) {
          type="text" 
          className="text--input"  
          placeholder='description...' />
-       
-        
-         </form>
+       </form>
 </div>
     
   )

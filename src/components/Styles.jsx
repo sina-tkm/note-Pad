@@ -8,6 +8,7 @@ import Rightcomponent from './Rightcomponent'
 
 function StyleNote(){
     const [noteStore,setnotestore] =useState([])
+    const [sortBy,setsortBy] =useState('completed')
     const handleNote = (newNote)=>{
         setnotestore((prevNote)=>[...prevNote,newNote])
     }
@@ -24,15 +25,30 @@ function StyleNote(){
         setnotestore(nowComp)
    
     }
+    let sortedNotos = noteStore;
+    if(sortBy ==="earlist")
+    sortedNotos = [...noteStore].sort(
+    (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
+
+    if(sortBy ==="latest")
+    sortedNotos = [...noteStore].sort(
+    (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
+
+    if(sortBy ==="completed")
+    sortedNotos = [...noteStore].sort(
+    (a,b)=>Number(a.completed) - Number(b.completed))
+
     return(
      <div className="container">
         <LeftComponent 
-        noteStore = {noteStore}
+        noteStore = {sortedNotos}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}
         />
         <Rightcomponent 
         onAddNote = {handleNote}
+        sortBy={sortBy}
+        onSort= {e=>setsortBy(e.target.value)}
         noteStore = {noteStore} 
         />  
      </div>

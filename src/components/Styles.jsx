@@ -25,23 +25,12 @@ function StyleNote(){
         setnotestore(nowComp)
    
     }
-    let sortedNotos = noteStore;
-    if(sortBy ==="earlist")
-    sortedNotos = [...noteStore].sort(
-    (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
-
-    if(sortBy ==="latest")
-    sortedNotos = [...noteStore].sort(
-    (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
-
-    if(sortBy ==="completed")
-    sortedNotos = [...noteStore].sort(
-    (a,b)=>Number(a.completed) - Number(b.completed))
 
     return(
      <div className="container">
         <LeftComponent 
-        noteStore = {sortedNotos}
+        noteStore = {noteStore}
+        sortBy = {sortBy}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}
         />

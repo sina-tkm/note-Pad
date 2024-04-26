@@ -6,8 +6,21 @@ import TrashIcon from '../component-icon/Icon.svg'
 
 
 
-function LeftComponent({handleDelete,onComplete,noteStore}) {
+function LeftComponent({handleDelete,onComplete,noteStore,sortBy}) {
   const [show,setshow]=useState(false)
+  let sortedNotos = noteStore;
+  if(sortBy ==="earlist")
+  sortedNotos = [...noteStore].sort(
+  (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
+
+  if(sortBy ==="latest")
+  sortedNotos = [...noteStore].sort(
+  (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
+
+  if(sortBy ==="completed")
+  sortedNotos = [...noteStore].sort(
+  (a,b)=>Number(a.completed) - Number(b.completed))
+
  
   return (
     <header className="left--container">
@@ -19,7 +32,7 @@ function LeftComponent({handleDelete,onComplete,noteStore}) {
     </div>
  <section className="storage storage--block">
  <h3 className={!noteStore.length ? "showtext": "not"}>no item...</h3>
-     {noteStore.map(note=>{
+     {sortedNotos.map(note=>{
       return(<ListMarup 
         noteStore = {noteStore}
         key={note.id} 

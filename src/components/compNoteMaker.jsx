@@ -5,7 +5,7 @@ import StatusBar from './StatusBar';
 import SortHeader from './sortHeader';
 
 
-function Rightcomponent({onAddNote,noteStore,sortBy,onSort}) {
+function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
     const [title,setTitle] = useState("");
     const [description,setDescription]=useState("")
     
@@ -52,4 +52,4 @@ function Rightcomponent({onAddNote,noteStore,sortBy,onSort}) {
     
   )
 }
-export default Rightcomponent
+export default CompNoteMaker

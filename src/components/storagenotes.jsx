@@ -8,7 +8,7 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 
 
-function LeftComponent({handleDelete,onComplete,noteStore,sortBy}) {
+function StorageNotes({handleDelete,onComplete,noteStore,sortBy}) {
   const [show,setshow]=useState(false);
   const [open,setopen] =useState(null);
   const handleOpen = (id)=>{
@@ -58,7 +58,7 @@ function LeftComponent({handleDelete,onComplete,noteStore,sortBy}) {
   )
 }
 
-export default LeftComponent
+export default StorageNotes
 
 
 

@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
-import LeftComponent from './leftComponent'
-import Rightcomponent from './Rightcomponent'
+import StorageNotes from './storagenotes'
+import CompNoteMaker from './compNoteMaker'
  
 
 
@@ -31,13 +31,13 @@ function StyleNote(){
 
     return(
      <div className="container">
-        <LeftComponent 
+        <StorageNotes
         noteStore = {noteStore}
         sortBy = {sortBy}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}
         />
-        <Rightcomponent 
+        <CompNoteMaker
         onAddNote = {handleNote}
         sortBy={sortBy}
         onSort= {e=>setsortBy(e.target.value)}

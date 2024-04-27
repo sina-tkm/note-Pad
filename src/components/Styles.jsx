@@ -9,6 +9,9 @@ import Rightcomponent from './Rightcomponent'
 function StyleNote(){
     const [noteStore,setnotestore] =useState([])
     const [sortBy,setsortBy] =useState('completed')
+
+
+    
     const handleNote = (newNote)=>{
         setnotestore((prevNote)=>[...prevNote,newNote])
     }
@@ -20,7 +23,7 @@ function StyleNote(){
     const handleComplete = (e)=>{
         const newNote = Number(e.target.value)
         const nowComp = noteStore.map((note)=>
-            note.id ===newNote ?{...note,completed:!note.completed } : note
+        note.id ===newNote ?{...note,completed:!note.completed } : note
         )
         setnotestore(nowComp)
    

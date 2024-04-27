@@ -1,5 +1,7 @@
-import { useState} from 'react'
-import TrashIcon from '../component-icon/Icon.svg'
+import { useState} from 'react';
+import TrashIcon from '../component-icon/Icon.svg';
+import {ChevronDownIcon} from "@heroicons/react/24/outline"
+
 
 
 
@@ -7,39 +9,47 @@ import TrashIcon from '../component-icon/Icon.svg'
 
 
 function LeftComponent({handleDelete,onComplete,noteStore,sortBy}) {
-  const [show,setshow]=useState(false)
-  let sortedNotos = noteStore;
+  const [show,setshow]=useState(false);
+  const [open,setopen] =useState(null);
+  const handleOpen = (id)=>{
+    setopen(id === open ? null :id)
+  
+  }
+  let sortedNotes = noteStore;
   if(sortBy ==="earlist")
-  sortedNotos = [...noteStore].sort(
+  sortedNotes = [...noteStore].sort(
   (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
 
   if(sortBy ==="latest")
-  sortedNotos = [...noteStore].sort(
+  sortedNotes = [...noteStore].sort(
   (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
 
   if(sortBy ==="completed")
-  sortedNotos = [...noteStore].sort(
+  sortedNotes = [...noteStore].sort(
   (a,b)=>Number(a.completed) - Number(b.completed))
 
  
   return (
-    <header className="left--container">
+      <header className="left--container">
     <div className="header dashboard--header">
-    <img src={TrashIcon}
-     alt="Icon"
+      <img src={TrashIcon}
+      alt="Icon"
       className="trash trash--icon" 
       onClick={()=>(setshow((is)=>!is))}/>
     </div>
- <section className="storage storage--block">
- <h3 className={!noteStore.length ? "showtext": "not"}>no item...</h3>
-     {sortedNotos.map(note=>{
-      return(<ListMarup 
+       <section className="storage storage--block">
+       <h3 className={!noteStore.length ? "showtext": "not"}>no item...</h3>
+     {sortedNotes.map(note=>{
+      return(
+      <ListMarup 
         noteStore = {noteStore}
         key={note.id} 
         dyno={note} 
         trashcanshow= {show} 
         handleDelete= {handleDelete} 
         onComplete={onComplete}
+        onOpen={handleOpen}
+        open= {open}
         
        />) 
      })}
@@ -52,7 +62,9 @@ export default LeftComponent
 
 
 
-function ListMarup({dyno,trashcanshow,handleDelete,onComplete}){
+function ListMarup({dyno,trashcanshow,handleDelete,onComplete,onOpen,open}){
+ const isOpen = dyno.id === open
+
   const option = {
     year:"numeric",
     month:"short",
@@ -61,28 +73,44 @@ function ListMarup({dyno,trashcanshow,handleDelete,onComplete}){
  
   
   return(
- <div  className="text text--block">
+ <div  className={ `${isOpen ? "text__block-content":"text--block"}`} >
   <div className="text--content">
-    <h3 className="title left">{dyno.title}</h3>
-    <p className="description left">{dyno.description}</p>
-    <div className="date left">{new Date(dyno.createdAt).toLocaleDateString('en-US',option)}</div>
-  </div>
-  <div className="action">
+    <div className='title--box'  onClick={()=>onOpen(dyno.id)}>
+       <h3 className="title left">{dyno.title}</h3>
+      <ChevronDownIcon 
+      style={{
+        height:"100%",
+        display:"flex",
+        alignItems:"center",
+        width:"12px",
+        transition: 'all .3s ease-in-out',
+        transformOrigin:"center",
+        rotate: isOpen ? "180deg" : "0deg"
+      }}
+      />
+    </div>
    
+    <p className="description left">{dyno.description}</p>
+  <div className="date left">
+      {new Date(dyno.createdAt).toLocaleDateString('en-US',option)}
+    </div>
+   </div>
+  <div className="action">
     <div className="trashcan--check">
-      <div className="trashCan right"><img src={TrashIcon}
-      alt="Icon"
-      onClick={()=>handleDelete(dyno.id)}  
-      className={trashcanshow ? "trashbox" : "hiddentrash"}/>
+      <div className="trashCan right">
+        <img src={TrashIcon}
+        alt="Icon"
+        onClick={()=>handleDelete(dyno.id)}  
+        className={trashcanshow ? "trashbox" : "hiddentrash"}/>
       </div>
       <div className="checkList right">
         <input
         value={dyno.id}
         onChange={onComplete}
-         type="checkbox"
-          name={dyno.id} 
-          id={dyno.id} 
-          className='checkbox' />
+        type="checkbox"
+        name={dyno.id} 
+        id={dyno.id} 
+        className='checkbox' />
       </div>
     </div>
   </div>

@@ -26,8 +26,8 @@ function HeaderComp(){
     
     const handleEditNote = (newText)=>{
         const privious = noteStore
-       const sina =  privious.filter(n=>n.id !== newText.id)
-        setnotestore([...sina,newText])  
+       const filtered =  privious.filter(n=>n.id !== newText.id)
+        setnotestore([...filtered,newText])  
     }
   
 
@@ -50,8 +50,6 @@ function HeaderComp(){
     }  
     const handleEditWin = (CompNote)=>{
       setEdit([...CompNote])
-
-    
 
     }
 

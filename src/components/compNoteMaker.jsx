@@ -9,6 +9,7 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
     const [title,setTitle] = useState("");
     const [description,setDescription]=useState("")
     
+    
 
    const handleClick=(e)=>{
     e.preventDefault()
@@ -32,8 +33,9 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
         <img src={NotePad}  alt="NotePad" className="note__pad--icon" onClick={handleClick}/>
       <SortHeader  sortBy={sortBy} onSort={onSort}/>
       <StatusBar noteStore= {noteStore}/>
-
-      </div>
+    </div>
+    
+     
        <form> 
          <input
          value={title}
@@ -48,6 +50,7 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
          className="text--input"  
          placeholder='description...' />
        </form>
+     
 </div>
     
   )

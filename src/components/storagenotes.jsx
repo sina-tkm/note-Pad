@@ -8,12 +8,12 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 
 
-function StorageNotes({handleDelete,onComplete,noteStore,sortBy}) {
+function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange}) {
+
   const [show,setshow]=useState(false);
   const [open,setopen] =useState(null);
   const handleOpen = (id)=>{
     setopen(id === open ? null :id)
-  
   }
   let sortedNotes = noteStore;
   if(sortBy ==="earlist")
@@ -50,6 +50,10 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy}) {
         onComplete={onComplete}
         onOpen={handleOpen}
         open= {open}
+        onAddEdit={onAddEdit}
+        onChange={onchange}
+        
+        
         
        />) 
      })}
@@ -62,14 +66,26 @@ export default StorageNotes
 
 
 
-function ListMarup({dyno,trashcanshow,handleDelete,onComplete,onOpen,open}){
+function ListMarup({dyno,trashcanshow,handleDelete,onComplete,onOpen,open,onAddEdit,onChange}){
  const isOpen = dyno.id === open
+ const onEdit = ()=>{
+const storage = [{
+  
+  title:dyno.title,
+  description:dyno.description,
+  id:dyno.id
+
+
+}]
+onAddEdit(storage)
+ }
 
   const option = {
     year:"numeric",
     month:"short",
     day:"numeric"
   }
+  
  
   
   return(
@@ -90,7 +106,7 @@ function ListMarup({dyno,trashcanshow,handleDelete,onComplete,onOpen,open}){
       />
     </div>
    
-    <p className="description left">{dyno.description}</p>
+    <p className="description left"  onClick={()=>{onEdit();onChange();}}>{dyno.description}</p>
   <div className="date left">
       {new Date(dyno.createdAt).toLocaleDateString('en-US',option)}
     </div>

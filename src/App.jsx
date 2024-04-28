@@ -1,9 +1,9 @@
 import "./app.css"
-import StyleNote from "./components/Styles"
+import HeaderComp from "./components/HeaderComp"
 
 function App(){
     return (
-    <StyleNote />
+    <HeaderComp />
     )
 }
 export default App

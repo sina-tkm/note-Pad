@@ -2,20 +2,40 @@
 import { useState } from 'react'
 import StorageNotes from './storagenotes'
 import CompNoteMaker from './compNoteMaker'
+import EditorCompennet from './EditorCompennet'
+
  
 
 
 
-function StyleNote(){
+function HeaderComp(){
     const [noteStore,setnotestore] =useState([])
     const [sortBy,setsortBy] =useState('completed')
-
-
+    const [Edit,setEdit]=useState([])
+    const [isShow,setisShow] =useState(false)
     
+    const handleIsClose = ()=>{
+        setisShow(!isShow)
+    }
+    const handleChange=()=>{
+        setisShow(!isShow)
+    }
+    const submitClose = ()=>{
+        setisShow(!isShow)
+    } 
+    
+    const handleEditNote = (newText)=>{
+        const privious = noteStore
+       const sina =  privious.filter(n=>n.id !== newText.id)
+        setnotestore([...sina,newText])  
+    }
+  
+
     const handleNote = (newNote)=>{
         setnotestore((prevNote)=>[...prevNote,newNote])
     }
-
+ 
+ 
     const handleDeleteNote = (id)=>{
         setnotestore(prevNote =>prevNote.filter(n =>n.id !== id))
     }
@@ -27,7 +47,16 @@ function StyleNote(){
         )
         setnotestore(nowComp)
    
+    }  
+    const handleEditWin = (CompNote)=>{
+      setEdit([...CompNote])
+
+    
+
     }
+
+ 
+
 
     return(
      <div className="container">
@@ -36,17 +65,36 @@ function StyleNote(){
         sortBy = {sortBy}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}
+        onAddEdit={handleEditWin}
+        Edit = {Edit}
+        onchange={handleChange}
         />
+        {Edit.map(note=>{
+        return( 
+        <EditorCompennet 
+        submitClose={submitClose}
+        isShow = {isShow}
+        key={note.id} 
+        Notes={note} 
+        onEditNote={handleEditNote}
+        isClose={handleIsClose}
+        />
+      )
+       
+       })}
+     
         <CompNoteMaker
+        Edit={Edit}
         onAddNote = {handleNote}
         sortBy={sortBy}
         onSort= {e=>setsortBy(e.target.value)}
         noteStore = {noteStore} 
+        
         />  
      </div>
     )
 }
-export default StyleNote
+export default HeaderComp
 
 
 

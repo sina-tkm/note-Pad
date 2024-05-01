@@ -17,6 +17,11 @@ function EditorCompennet({Notes,onEditNote,isClose,isShow,submitClose}) {
     setnewdesc('')
     
   }
+  const option = {
+    year:"numeric",
+    month:"short",
+    day:"numeric"
+  }
 
   return (
     <div className={isShow?"edit--window":"not--window"}>
@@ -24,6 +29,7 @@ function EditorCompennet({Notes,onEditNote,isClose,isShow,submitClose}) {
     <div className="title--window">
       <h4 className="detail--window">Title:  {Notes.title}</h4>
       <h5 className="detail--window">Description:  {Notes.description}</h5>
+      <div className="date--time">{new Date(Notes.date).toLocaleDateString("en"-"US",option)}</div>
     </div>
    
       <div className="input--window">

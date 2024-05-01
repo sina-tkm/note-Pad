@@ -232,11 +232,13 @@ line-break: anywhere;
 
 }
 .title--window{
+  
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 10px 0;
-  margin-bottom: 60px;
+  margin-bottom: 55px;
+  row-gap: 40px;
 
 }
 .input--form{
@@ -289,4 +291,7 @@ line-break: anywhere;
   align-items: center;
   display: none;
 
+}
+.date--time{
+  font-size: 12px;
 }

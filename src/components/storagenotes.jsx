@@ -73,7 +73,8 @@ const storage = [{
   
   title:dyno.title,
   description:dyno.description,
-  id:dyno.id
+  id:dyno.id,
+  date:dyno.createdAt
 
 
 }]

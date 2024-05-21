@@ -1,18 +1,27 @@
 
-import { useState } from 'react'
+import {   useEffect, useState } from 'react'
 import StorageNotes from './storagenotes'
 import CompNoteMaker from './compNoteMaker'
 import EditorCompennet from './EditorCompennet'
 
- 
-
 
 
 function HeaderComp(){
-    const [noteStore,setnotestore] =useState([])
+    const [noteStore,setnotestore] = useState(()=>JSON.parse(localStorage.getItem('ITEMSLIST'))||[])
     const [sortBy,setsortBy] =useState('completed')
     const [Edit,setEdit]=useState([])
     const [isShow,setisShow] =useState(false)
+  
+     
+      
+
+
+    
+  
+
+    useEffect(()=> localStorage.setItem('ITEMSLIST',JSON.stringify(noteStore)),[noteStore])
+   
+  
     
     const handleIsClose = ()=>{
         setisShow(!isShow)
@@ -32,7 +41,8 @@ function HeaderComp(){
   
 
     const handleNote = (newNote)=>{
-        setnotestore((prevNote)=>[...prevNote,newNote])
+        setnotestore((prevNote)=>[...prevNote,newNote]) 
+   
     }
  
  
@@ -46,20 +56,18 @@ function HeaderComp(){
         note.id ===newNote ?{...note,completed:!note.completed } : note
         )
         setnotestore(nowComp)
-   
+
     }  
     const handleEditWin = (CompNote)=>{
       setEdit([...CompNote])
 
     }
 
- 
-
-
     return(
      <div className="container">
         <StorageNotes
-        noteStore = {noteStore}
+      
+        noteStore={noteStore}
         sortBy = {sortBy}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}

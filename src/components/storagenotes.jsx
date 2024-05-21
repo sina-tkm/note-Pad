@@ -1,4 +1,6 @@
-import { useState} from 'react';
+
+
+import {  useState} from 'react';
 import TrashIcon from '../component-icon/Icon.svg';
 import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
@@ -15,8 +17,23 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
   const handleOpen = (id)=>{
     setopen(id === open ? null :id)
   }
-  let sortedNotes = noteStore;
-  if(sortBy ==="earlist")
+  let sortedNotes = noteStore
+  switch (sortBy) {
+    case "earliest":
+      sortedNotes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      break;
+    case "latest":
+      sortedNotes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      break;
+    case "completed":
+      sortedNotes.sort((a, b) => Number(a.completed) - Number(b.completed));
+      break;
+    default:
+     
+      break;
+  }
+
+  if(sortBy ==="earliest")
   sortedNotes = [...noteStore].sort(
   (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
 
@@ -24,11 +41,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
   sortedNotes = [...noteStore].sort(
   (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
 
-  if(sortBy ==="completed")
-  sortedNotes = [...noteStore].sort(
-  (a,b)=>Number(a.completed) - Number(b.completed))
 
- 
   return (
       <header className="left--container">
     <div className="header dashboard--header">
@@ -42,7 +55,9 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
      {sortedNotes.map(note=>{
       return(
       <ListMarup 
-        noteStore = {noteStore}
+
+     
+       noteStore={noteStore}
         key={note.id} 
         dyno={note} 
         trashcanshow= {show} 
@@ -66,11 +81,24 @@ export default StorageNotes
 
 
 
-function ListMarup({dyno,trashcanshow,handleDelete,onComplete,onOpen,open,onAddEdit,onChange}){
+function ListMarup({dyno,trashcanshow,handleDelete,onOpen,open,onAddEdit,onChange,onComplete}){
+  // const [isChecked, setIsChecked] = useState(() => {
+  //   const saved = localStorage.getItem('checkboxState');
+  //   return saved === 'true'; 
+  // });
+  // useEffect(() => {
+  //   localStorage.setItem('checkboxState', isChecked);
+  // }, [isChecked]);
+  
+  // const handleCheckboxChange = (id) => {
+  //   setIsChecked(prevChecked =>dyno.id === id ? !prevChecked:prevChecked);
+  
+  // };
+
+
  const isOpen = dyno.id === open
  const onEdit = ()=>{
 const storage = [{
-  
   title:dyno.title,
   description:dyno.description,
   id:dyno.id,
@@ -119,11 +147,12 @@ onAddEdit(storage)
         alt="Icon"
         onClick={()=>handleDelete(dyno.id)}  
         className={trashcanshow ? "trashbox" : "hiddentrash"}/>
-      </div>
-      <div className="checkList right">
+        </div>
+        <div className="checkList right">
         <input
         value={dyno.id}
         onChange={onComplete}
+        checked={dyno.completed}
         type="checkbox"
         name={dyno.id} 
         id={dyno.id} 

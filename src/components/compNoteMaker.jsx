@@ -5,7 +5,7 @@ import StatusBar from './StatusBar';
 import SortHeader from './sortHeader';
 
 
-function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
+function CompNoteMaker({onAddNote,noteStore,sortBy,onSort,isChecked}) {
     const [title,setTitle] = useState("");
     const [description,setDescription]=useState("")
     
@@ -15,13 +15,14 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
     e.preventDefault()
     if(!title ||!description) return null;
     const newNote = {
+        isChecked,
         title,
         description,
         id:Date.now(),
         completed:false,
         createdAt:new Date().toISOString()
     }
-   onAddNote(newNote)
+    onAddNote(newNote)
     setTitle('')
     setDescription('')
    
@@ -38,8 +39,8 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort}) {
      
        <form> 
          <input
-         value={title}
-         onChange={(e)=>{setTitle(e.target.value)}}
+          value={title}
+          onChange={(e)=>{setTitle(e.target.value)}}
           type="text" 
           className='title--input' 
           placeholder='title...' />

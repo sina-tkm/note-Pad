@@ -1,6 +1,6 @@
 
 
-import {  useState} from 'react';
+import {useState} from 'react';
 import TrashIcon from '../component-icon/Icon.svg';
 import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
@@ -32,16 +32,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
      
       break;
   }
-
-  if(sortBy ==="earliest")
-  sortedNotes = [...noteStore].sort(
-  (a,b)=>new Date(a.createdAt) - new Date(b.createdAt))
-
-  if(sortBy ==="latest")
-  sortedNotes = [...noteStore].sort(
-  (a,b)=>new Date(b.createdAt) - new Date(a.createdAt))
-
-
+  
   return (
       <header className="left--container">
     <div className="header dashboard--header">
@@ -82,18 +73,7 @@ export default StorageNotes
 
 
 function ListMarup({dyno,trashcanshow,handleDelete,onOpen,open,onAddEdit,onChange,onComplete}){
-  // const [isChecked, setIsChecked] = useState(() => {
-  //   const saved = localStorage.getItem('checkboxState');
-  //   return saved === 'true'; 
-  // });
-  // useEffect(() => {
-  //   localStorage.setItem('checkboxState', isChecked);
-  // }, [isChecked]);
-  
-  // const handleCheckboxChange = (id) => {
-  //   setIsChecked(prevChecked =>dyno.id === id ? !prevChecked:prevChecked);
-  
-  // };
+
 
 
  const isOpen = dyno.id === open

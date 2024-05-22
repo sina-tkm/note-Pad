@@ -315,11 +315,11 @@ line-break: anywhere;
     
   }
   .left--container{
-    transition: all .3s ease-in;
+    transition: all .1s ease-in;
     width: 30%;
   }
   .right--container{
-    transition: all .3s ease-in;
+    transition: all .1s ease-in;
     width:70%
   }
   .item--info{
@@ -328,14 +328,13 @@ line-break: anywhere;
   }
   select{
     width: 80px;
-    transition:  all .3s ease-in;
+    transition:  all .1s ease-in;
 
   }
   
 }
 @media screen and (max-width:500px) {
   .left--badge{
-    
     background-color: rgb(220, 221, 225);
     border-radius: 16px;
     transition: all .3s;
@@ -345,6 +344,7 @@ line-break: anywhere;
     
   }
 
+
 .left--container{
   background-color: rgb(220, 221, 225);
   border-radius: 16px;
@@ -352,7 +352,7 @@ line-break: anywhere;
   width:55%;
   position: absolute;
   left: 0;
-  transition:  all .3s ease-in;
+  
 }
   .right--container{
     width: 100%;
@@ -388,7 +388,7 @@ line-break: anywhere;
 
   .list--info{
     column-gap: 10px;
-    transition:  all .3s ease-in;
+    transition:  all .1s ease-in;
     
   }
   .item--info{

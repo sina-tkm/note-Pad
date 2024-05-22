@@ -46,11 +46,11 @@ function HeaderComp(){
             if(window.innerWidth >= 500){
             setPull(false)}
         }
-       
+       window.addEventListener('resize',maketrue)
         maketrue()
 
       
-    },[pull])
+    },[])
 
     
 

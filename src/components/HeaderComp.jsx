@@ -27,7 +27,7 @@ function noteStorage(state,{type,payload}){
             return  state.filter(n=>n.id !== payload)
         case "complete":
             return  state.map((note)=> note.id ===payload ?{...note,completed:!note.completed } : note)
-       case "edit":
+        case "edit":
             return [ ...state.filter(n=>n.id !== payload.id),payload]           
 
 }
@@ -38,8 +38,19 @@ function HeaderComp(){
     const [sortBy,setsortBy] =useState('completed')
     const [Edit,setEdit]=useState([])
     const [isShow,dispatch2] = useReducer(ShowClose,false)
+    const [draw,setDraw] = useState(true)
 
-  
+    const handleDraw = ()=>{
+        if(window.innerWidth <=500){
+          setDraw(false)
+        }
+      }
+      const handleClose = ()=>{
+        if(window.innerWidth <=500){
+            setDraw(true)
+        }
+      }
+      
 
    
     useEffect(()=> localStorage.setItem('ITEMSLIST',JSON.stringify(noteStore)),[noteStore])
@@ -83,10 +94,11 @@ function HeaderComp(){
     return(
      <div className="container">
         <StorageNotes
-      
+        draw={draw}
+        handleDraw={handleDraw}
         noteStore={noteStore}
         sortBy = {sortBy}
-         Edit = {Edit}
+        Edit = {Edit}
         handleDelete={handleDeleteNote} 
         onComplete={handleComplete}
         onAddEdit={handleEditWin}
@@ -107,9 +119,11 @@ function HeaderComp(){
        })}
      
         <CompNoteMaker
+        handleClose={handleClose}
+        draw={draw}
         Edit={Edit}
         sortBy={sortBy}
-         noteStore = {noteStore} 
+        noteStore = {noteStore} 
         onAddNote = {handleNote}
         onSort= {e=>setsortBy(e.target.value)}
        

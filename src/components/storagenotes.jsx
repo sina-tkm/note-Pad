@@ -1,6 +1,6 @@
 
 
-import {useState} from 'react';
+import { useState} from 'react';
 import TrashIcon from '../component-icon/Icon.svg';
 import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
@@ -10,10 +10,19 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 
 
-function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange}) {
+function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,handleDraw,draw}) {
 
   const [show,setshow]=useState(false);
   const [open,setopen] =useState(null);
+  
+  
+
+
+
+
+
+
+ 
   const handleOpen = (id)=>{
     setopen(id === open ? null :id)
   }
@@ -34,7 +43,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
   }
   
   return (
-      <header className="left--container">
+      <header className= {draw &&window.innerWidth<=500 ? "left--badge" : "left--container"} onClick={handleDraw}>
     <div className="header dashboard--header">
       <img src={TrashIcon}
       alt="Icon"

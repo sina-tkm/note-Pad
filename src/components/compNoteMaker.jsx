@@ -5,7 +5,7 @@ import StatusBar from './StatusBar';
 import SortHeader from './sortHeader';
 
 
-function CompNoteMaker({onAddNote,noteStore,sortBy,onSort,isChecked}) {
+function CompNoteMaker({onAddNote,noteStore,sortBy,onSort,isChecked,handleClose}) {
     const [title,setTitle] = useState("");
     const [description,setDescription]=useState("")
     
@@ -29,7 +29,7 @@ function CompNoteMaker({onAddNote,noteStore,sortBy,onSort,isChecked}) {
    }
   
   return (
-    <div className="right--container">
+    <div className="right--container" onClick={handleClose}>
     <div className="header right--header">
         <img src={NotePad}  alt="NotePad" className="note__pad--icon" onClick={handleClick}/>
       <SortHeader  sortBy={sortBy} onSort={onSort}/>

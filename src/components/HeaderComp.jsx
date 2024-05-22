@@ -38,18 +38,29 @@ function HeaderComp(){
     const [sortBy,setsortBy] =useState('completed')
     const [Edit,setEdit]=useState([])
     const [isShow,dispatch2] = useReducer(ShowClose,false)
-    const [draw,setDraw] = useState(true)
+    const [pull,setPull] = useState(false)
+    
 
-    const handleDraw = ()=>{
-        if(window.innerWidth <=500){
-          setDraw(false)
+    useEffect(()=>{
+        const maketrue = ()=>{
+            if(window.innerWidth >= 500){
+            setPull(false)}
         }
-      }
-      const handleClose = ()=>{
-        if(window.innerWidth <=500){
-            setDraw(true)
+       
+        maketrue()
+
+      
+    },[pull])
+
+    
+
+
+        const handleClose = ()=>{
+         setPull(true)    
+          }     
+        const handlePull = ()=>{
+          setPull(false)
         }
-      }
       
 
    
@@ -93,9 +104,10 @@ function HeaderComp(){
 
     return(
      <div className="container">
+        <div className={ !pull    ? "closenav" : "displaynav"} id='close-nav' onClick={handleClose}></div>
         <StorageNotes
-        draw={draw}
-        handleDraw={handleDraw}
+        pull={pull}
+        handlePull={handlePull}
         noteStore={noteStore}
         sortBy = {sortBy}
         Edit = {Edit}
@@ -119,8 +131,6 @@ function HeaderComp(){
        })}
      
         <CompNoteMaker
-        handleClose={handleClose}
-        draw={draw}
         Edit={Edit}
         sortBy={sortBy}
         noteStore = {noteStore} 

@@ -1,6 +1,6 @@
 
 
-import { useState} from 'react';
+import {  useState} from 'react';
 import TrashIcon from '../component-icon/Icon.svg';
 import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
@@ -10,16 +10,15 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 
 
-function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,handleDraw,draw}) {
+function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,pull,handlePull}) {
 
   const [show,setshow]=useState(false);
   const [open,setopen] =useState(null);
+ 
   
-  
 
 
-
-
+ 
 
 
  
@@ -41,9 +40,12 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
      
       break;
   }
+
   
   return (
-      <header className= {draw &&window.innerWidth<=500 ? "left--badge" : "left--container"} onClick={handleDraw}>
+  
+      <header className= { pull && window.innerWidth<=500 ? "left--badge" : "left--container"} id='cheat--code' onClick={()=>handlePull()}>  
+    
     <div className="header dashboard--header">
       <img src={TrashIcon}
       alt="Icon"
@@ -55,9 +57,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
      {sortedNotes.map(note=>{
       return(
       <ListMarup 
-
-     
-       noteStore={noteStore}
+        noteStore={noteStore}
         key={note.id} 
         dyno={note} 
         trashcanshow= {show} 
@@ -85,9 +85,9 @@ function ListMarup({dyno,trashcanshow,handleDelete,onOpen,open,onAddEdit,onChang
 
 
 
- const isOpen = dyno.id === open
- const onEdit = ()=>{
-const storage = [{
+  const isOpen = dyno.id === open
+  const onEdit = ()=>{
+  const storage = [{
   title:dyno.title,
   description:dyno.description,
   id:dyno.id,
@@ -98,7 +98,7 @@ const storage = [{
 onAddEdit(storage)
  }
 
-  const option = {
+    const option = {
     year:"numeric",
     month:"short",
     day:"numeric"

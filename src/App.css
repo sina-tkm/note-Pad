@@ -335,19 +335,21 @@ line-break: anywhere;
 }
 @media screen and (max-width:500px) {
   .left--badge{
+    
     background-color: rgb(220, 221, 225);
     border-radius: 16px;
-    transition: all .3s ease-out;
+    transition: all .3s;
     position: absolute;
     left: -90px;
-    transition:  all .3s ease-in;
+  
+    
   }
 
 .left--container{
   background-color: rgb(220, 221, 225);
   border-radius: 16px;
-  transition: all .3s ease-out;
-  width:40%;
+  transition: all .3s ;
+  width:55%;
   position: absolute;
   left: 0;
   transition:  all .3s ease-in;
@@ -361,16 +363,46 @@ line-break: anywhere;
     column-gap: 40px;
     justify-content: end;
   }
+  .displaynav{
+    display: none;
+  }
+  .closenav{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  
+   
+    
+  }
+  .title--input{
+    padding-left: 40px;
+
+  }
+  .text--input{
+    padding-left: 40px;
+  }
 
   
 }
 @media screen and (max-width:375px) {
+
+  .list--info{
+    column-gap: 10px;
+    transition:  all .3s ease-in;
+    
+  }
+  .item--info{
+    row-gap: 4px;
+  }
+  .completed--info,.all--info,.open--info{
+    font-size: 8px;
+  }
   .right--header{
-    column-gap: 30px;
+    column-gap: 40px;
     align-items: center;
   }
-  .right--header{
+  .small-font{
     column-gap: 20px;
   }
-  
+
 }

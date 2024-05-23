@@ -10,6 +10,7 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 
 
+
 function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,pull,handlePull}) {
 
   const [show,setshow]=useState(false);
@@ -28,17 +29,15 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
   let sortedNotes = noteStore
   switch (sortBy) {
     case "earliest":
-      sortedNotes.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      sortedNotes=[...noteStore].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
       break;
     case "latest":
-      sortedNotes.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-      break;
+      sortedNotes= [...noteStore].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+     break;
     case "completed":
-      sortedNotes.sort((a, b) => Number(a.completed) - Number(b.completed));
-      break;
-    default:
-     
-      break;
+      sortedNotes=[...noteStore].sort((a, b) => Number(a.completed) - Number(b.completed));
+    break;
+    
   }
 
   
@@ -53,7 +52,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
       onClick={()=>(setshow((is)=>!is))}/>
     </div>
        <section className="storage storage--block">
-       <h3 className={!noteStore.length ? "showtext": "not"}>no item...</h3>
+       <h3 className={![...noteStore].length ? "showtext": "not"}>no item...</h3>
      {sortedNotes.map(note=>{
       return(
       <ListMarup 

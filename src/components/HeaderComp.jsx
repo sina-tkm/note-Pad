@@ -19,27 +19,16 @@ switch(action.type){
     return null
 }
 }
-function noteStorage(state,{type,payload}){
-    switch(type){
-        case "add":
-            return [...state,payload]
-        case "delete":
-            return  state.filter(n=>n.id !== payload)
-        case "complete":
-            return  state.map((note)=> note.id ===payload ?{...note,completed:!note.completed } : note)
-        case "edit":
-            return [ ...state.filter(n=>n.id !== payload.id),payload]           
-
-}
-}
 
 function HeaderComp(){
-    const [noteStore,dispatch1] = useReducer(noteStorage,[],()=>JSON.parse(localStorage.getItem('ITEMSLIST')))
+   
+    const [noteStore,setNotestore] = useState(()=>JSON.parse(localStorage.getItem('ITEMSLIST'))||[])
     const [sortBy,setsortBy] =useState('completed')
     const [Edit,setEdit]=useState([])
     const [isShow,dispatch2] = useReducer(ShowClose,false)
     const [pull,setPull] = useState(false)
     
+    console.log(noteStore)
 
     useEffect(()=>{
         const maketrue = ()=>{
@@ -51,9 +40,6 @@ function HeaderComp(){
 
       
     },[])
-
-    
-
 
         const handleClose = ()=>{
          setPull(true)    
@@ -79,22 +65,31 @@ function HeaderComp(){
     } 
     
     const handleEditNote = (newText)=>{
-    dispatch1({type:"edit",payload:newText})
+
+     const filtered = [...noteStore].filter(n=>n.id !== newText.id)
+        setNotestore([...filtered,newText])
+    
     }
   
 
     const handleNote = (newNote)=>{
-    dispatch1({type:"add",payload:newNote})
+
+      setNotestore(prev =>[...prev,newNote])
+
     }
  
  
-    const handleDeleteNote = (id)=>{
-    dispatch1({type:"delete",payload:id})
+    const handleDeleteNote = (e)=>{
+  
+    setNotestore(prevNote =>prevNote.filter(n =>n.id !== e))
     }
 
     const handleComplete = (e)=>{
         const newNote = Number(e.target.value)
-        dispatch1({type:"complete",payload : newNote})
+        const nowComp = noteStore.map((note)=>
+            note.id ===newNote ?{...note,completed:!note.completed } : note
+            )
+            setNotestore(nowComp)
 
     }  
     const handleEditWin = (CompNote)=>{

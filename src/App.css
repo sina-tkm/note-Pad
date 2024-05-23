@@ -5,6 +5,7 @@
   box-sizing: border-box;
   font-family: "Roboto Condensed", sans-serif;
 }
+
 .container{
   width: 100%;
   padding: 0;
@@ -46,7 +47,7 @@
   height: 20px;
 }
 .header{
-  padding:22px;
+  padding:15px;
   height: 60px;
   display: flex;
   align-items: center;
@@ -115,7 +116,7 @@
   cursor: pointer;
   padding:12px;
   width: 90%;
-  height: 6vh;
+  height: 44px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -129,7 +130,7 @@
   cursor: pointer;
   padding: 12px;
   width: 90%;
-  height: 15vh;
+  height:110px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -139,12 +140,18 @@
 
 
 .title--input{
+  
   width: 100%;
   border: .1px solid  rgb(189, 195, 199);
   height: 50px;
   padding-left: 20px;
 }
+input:focus{
+  outline-width: 0;
+  
+}
 .text--content{
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -153,6 +160,7 @@
 }
 
 .title{
+  width: 44px;
   overflow: hidden;
   font-weight: 400;
   font-size: 16px;
@@ -203,6 +211,7 @@ line-break: anywhere;
   display: none;
 }
 .title--box{
+  height: 24px;
   display: flex;
   column-gap: 8px;
   align-items: center;
@@ -221,7 +230,7 @@ line-break: anywhere;
 }
 .ineditor--window{
   padding: 40px;
-  width: 40%;
+
   justify-content: space-around;
   height: 250px;
   background-color: hsl(192,15.2%,93.5%);
@@ -340,7 +349,7 @@ line-break: anywhere;
     transition: all .3s;
     position: absolute;
     left: -90px;
-  
+ 
     
   }
 
@@ -375,16 +384,16 @@ line-break: anywhere;
     
   }
   .title--input{
-    padding-left: 40px;
+    padding-left: 60px;
 
   }
   .text--input{
-    padding-left: 40px;
+    padding-left: 60px;
   }
 
   
 }
-@media screen and (max-width:375px) {
+@media screen and (max-width:380px) {
 
   .list--info{
     column-gap: 10px;
@@ -403,6 +412,19 @@ line-break: anywhere;
   }
   .small-font{
     column-gap: 20px;
+  }
+  .ineditor--window{
+    padding: 40px;
+   
+    justify-content: space-around;
+    height: 250px;
+    background-color: hsl(192,15.2%,93.5%);
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+  
+    
+  
   }
 
 }

@@ -348,8 +348,8 @@ line-break: anywhere;
     border-radius: 16px;
     transition: all .3s;
     position: absolute;
-    left: -90px;
- 
+    left: -200px;
+     width: 240px;
     
   }
 

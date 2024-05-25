@@ -28,7 +28,6 @@ function HeaderComp(){
     const [isShow,dispatch2] = useReducer(ShowClose,false)
     const [pull,setPull] = useState(false)
     
-    console.log(noteStore)
 
     useEffect(()=>{
         const maketrue = ()=>{
@@ -79,15 +78,15 @@ function HeaderComp(){
     }
  
  
-    const handleDeleteNote = (e)=>{
-  
-    setNotestore(prevNote =>prevNote.filter(n =>n.id !== e))
+    const handleDeleteNote = ()=>{
+        console.log("sina")
+        setNotestore(prevNote =>prevNote.filter(n =>!n.completed))
     }
 
     const handleComplete = (e)=>{
         const newNote = Number(e.target.value)
         const nowComp = noteStore.map((note)=>
-            note.id ===newNote ?{...note,completed:!note.completed } : note
+        note.id ===newNote ?{...note,completed:!note.completed } : note
             )
             setNotestore(nowComp)
 

@@ -13,7 +13,7 @@ import {ChevronDownIcon} from "@heroicons/react/24/outline"
 
 function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,pull,handlePull}) {
 
-  const [show,setshow]=useState(false);
+  
   const [open,setopen] =useState(null);
  
   
@@ -49,7 +49,7 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
       <img src={TrashIcon}
       alt="Icon"
       className="trash trash--icon" 
-      onClick={()=>(setshow((is)=>!is))}/>
+      onClick={handleDelete}/>
     </div>
        <section className="storage storage--block">
        <h3 className={![...noteStore].length ? "showtext": "not"}>no item...</h3>
@@ -59,8 +59,6 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
         noteStore={noteStore}
         key={note.id} 
         dyno={note} 
-        trashcanshow= {show} 
-        handleDelete= {handleDelete} 
         onComplete={onComplete}
         onOpen={handleOpen}
         open= {open}
@@ -80,7 +78,7 @@ export default StorageNotes
 
 
 
-function ListMarup({dyno,trashcanshow,handleDelete,onOpen,open,onAddEdit,onChange,onComplete}){
+function ListMarup({dyno,onOpen,open,onAddEdit,onChange,onComplete}){
 
 
 
@@ -131,10 +129,6 @@ onAddEdit(storage)
   <div className="action">
     <div className="trashcan--check">
       <div className="trashCan right">
-        <img src={TrashIcon}
-        alt="Icon"
-        onClick={()=>handleDelete(dyno.id)}  
-        className={trashcanshow ? "trashbox" : "hiddentrash"}/>
         </div>
         <div className="checkList right">
         <input

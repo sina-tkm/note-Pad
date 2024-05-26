@@ -104,8 +104,9 @@
   column-gap: 12px;
 }
 .text--input{
+  height: 100%;
   font-size: 18px;
-  height: 593px;
+  height: 100%;
   width: 100%;
   border: .1px solid  rgb(189, 195, 199);
   padding-bottom: 519px;
@@ -390,6 +391,7 @@ line-break: anywhere;
   }
   .text--input{
     padding-left: 60px;
+
   }
 
   
@@ -408,7 +410,7 @@ line-break: anywhere;
     font-size: 8px;
   }
   .right--header{
-    column-gap: 40px;
+    column-gap: 59px;
     align-items: center;
   }
   .small-font{
@@ -426,6 +428,12 @@ line-break: anywhere;
   
     
   
+  }
+  .text--input{
+    padding-bottom: 484px;
+  }
+  .left--container{
+    height: 100%;
   }
 
 }

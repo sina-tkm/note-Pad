@@ -1,24 +1,21 @@
 
 
-import {  useState} from 'react';
+import {  useContext, useState} from 'react';
 import TrashIcon from '../component-icon/Icon.svg';
 import {ChevronDownIcon} from "@heroicons/react/24/outline"
+import { NoteContext } from './HeaderComp';
+import { useDispatch, useNotes } from './contexts/notelist';
 
 
 
 
-
-
-
-
-function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchange,pull,handlePull}) {
-
-  
-  const [open,setopen] =useState(null);
- 
+function StorageNotes({onAddEdit,onchange,pull,handlePull}) {
   
 
-
+const {sortBy} = useContext(NoteContext)
+const [open,setopen] =useState(null);
+const dispatch = useDispatch() 
+const notestore = useNotes()
  
 
 
@@ -26,47 +23,43 @@ function StorageNotes({handleDelete,onComplete,noteStore,sortBy,onAddEdit,onchan
   const handleOpen = (id)=>{
     setopen(id === open ? null :id)
   }
-  let sortedNotes = noteStore
-  switch (sortBy) {
-    case "earliest":
-      sortedNotes=[...noteStore].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-      break;
-    case "latest":
-      sortedNotes= [...noteStore].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-     break;
-    case "completed":
-      sortedNotes=[...noteStore].sort((a, b) => Number(a.completed) - Number(b.completed));
-    break;
-    
-  }
+  let sortedNotes = notestore
+  
+  if (sortBy === "earliest")
+    sortedNotes = [...notestore].sort(
+      (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+    ); // a -b  => a > b ? 1 : -1
+
+  if (sortBy === "latest")
+    sortedNotes = [...notestore].sort(
+      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    ); // b -a  => a > b ? -1 : 1
+
+  if (sortBy === "completed")
+    sortedNotes = [...notestore].sort(
+      (a, b) => Number(a.completed) - Number(b.completed)
+    );
 
   
   return (
-  
-      <header className= { pull && window.innerWidth<=500 ? "left--badge" : "left--container"} id='cheat--code' onClick={()=>handlePull()}>  
-    
-    <div className="header dashboard--header">
+      <header className= { pull && window.innerWidth<=500 ? "left--badge" : "left--container"} id='cheat--code' onClick={()=>handlePull()}> 
+      <div className="header dashboard--header">
       <img src={TrashIcon}
       alt="Icon"
       className="trash trash--icon" 
-      onClick={handleDelete}/>
-    </div>
+      onClick={()=>dispatch({type:"delete"})}/>
+      </div>
        <section className="storage storage--block">
-       <h3 className={![...noteStore].length ? "showtext": "not"}>no item...</h3>
+       <h3 className={![...notestore].length ? "showtext": "not"}>no item...</h3>
      {sortedNotes.map(note=>{
       return(
       <ListMarup 
-        noteStore={noteStore}
         key={note.id} 
         dyno={note} 
-        onComplete={onComplete}
         onOpen={handleOpen}
         open= {open}
         onAddEdit={onAddEdit}
         onChange={onchange}
-        
-        
-        
        />) 
      })}
 </section>
@@ -78,10 +71,8 @@ export default StorageNotes
 
 
 
-function ListMarup({dyno,onOpen,open,onAddEdit,onChange,onComplete}){
-
-
-
+function ListMarup({dyno,onOpen,open,onAddEdit,onChange}){
+  const dispatch = useDispatch()
   const isOpen = dyno.id === open
   const onEdit = ()=>{
   const storage = [{
@@ -89,9 +80,8 @@ function ListMarup({dyno,onOpen,open,onAddEdit,onChange,onComplete}){
   description:dyno.description,
   id:dyno.id,
   date:dyno.createdAt
-
-
 }]
+
 onAddEdit(storage)
  }
 
@@ -133,7 +123,10 @@ onAddEdit(storage)
         <div className="checkList right">
         <input
         value={dyno.id}
-        onChange={onComplete}
+        onChange={((e)=>{
+          const checklist = Number(e.target.value)
+          dispatch({type:"completed",payload:checklist})
+        })}
         checked={dyno.completed}
         type="checkbox"
         name={dyno.id} 

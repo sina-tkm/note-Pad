@@ -1,8 +1,12 @@
+import { useNotes } from "./contexts/notelist"
 
 
-function StatusBar({noteStore}) {
-    const allStatus = noteStore.length
-    const completedstatus = noteStore.filter(note=>note.completed).length
+function StatusBar(){
+  
+  const notestore = useNotes()
+ 
+    const allStatus = notestore.length
+    const completedstatus = notestore.filter(note=>note.completed).length
     const uncompletedNote = allStatus - completedstatus
 
   return (

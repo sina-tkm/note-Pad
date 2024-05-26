@@ -1,9 +1,11 @@
 import { useState } from "react"
+import { useDispatch } from "./contexts/notelist"
 
 
-function EditorCompennet({Notes,onEditNote,isClose,isShow,submitClose}) {
+function EditorCompennet({Notes,isClose,isShow,submitClose}) {
   const [title,setnewTitle] = useState("")
   const [description,setnewdesc] = useState("")
+  const dispatch = useDispatch()
   const handleSubmit = ()=>{
     const newText = {
       title,
@@ -12,7 +14,7 @@ function EditorCompennet({Notes,onEditNote,isClose,isShow,submitClose}) {
       completed:false,
       createdAt:new Date().toISOString()
     }
-    onEditNote(newText)
+    dispatch({type:"edit",payload:newText})
     setnewTitle('')
     setnewdesc('')
     

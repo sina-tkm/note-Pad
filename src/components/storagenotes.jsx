@@ -19,7 +19,6 @@ const notestore = useNotes()
  
 
 
- 
   const handleOpen = (id)=>{
     setopen(id === open ? null :id)
   }
@@ -71,6 +70,9 @@ export default StorageNotes
 
 
 
+
+
+
 function ListMarup({dyno,onOpen,open,onAddEdit,onChange}){
   const dispatch = useDispatch()
   const isOpen = dyno.id === open
@@ -109,7 +111,7 @@ onAddEdit(storage)
         rotate: isOpen ? "180deg" : "0deg"
       }}
       />
-    </div>
+     </div>
    
     <p className="description left"  onClick={()=>{onEdit();onChange();}}>{dyno.description}</p>
   <div className="date left">

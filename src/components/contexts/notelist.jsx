@@ -17,9 +17,9 @@ import { createContext,useContext,useEffect,useReducer} from "react";
       
         case "edit":{
             
-            const filtered = notestore.filter(n=>n.id !== action.payload.id)
+            
         
-        return  [...filtered,...action.payload]
+        return  [...notestore.filter(n=>n.id !== action.payload.id),action.payload]
             
         }
         case "completed" :{

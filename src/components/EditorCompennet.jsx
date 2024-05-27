@@ -3,6 +3,16 @@ import { useDispatch } from "./contexts/notelist"
 
 
 function EditorCompennet({Notes,isClose,isShow,submitClose}) {
+
+  return(
+   isShow ? <EditModal Notes={Notes} isClose={isClose} isShow={isShow} submitClose={submitClose}/> : null
+  )
+}
+
+export default EditorCompennet
+ 
+
+function EditModal({Notes,isClose,submitClose}){
   const [title,setnewTitle] = useState("")
   const [description,setnewdesc] = useState("")
   const dispatch = useDispatch()
@@ -26,7 +36,7 @@ function EditorCompennet({Notes,isClose,isShow,submitClose}) {
   }
 
   return (
-    <div className={isShow?"edit--window":"not--window"}>
+    <div className="edit--window">
     <div className="ineditor--window">
     <div className="title--window">
       <h4 className="detail--window">Title:  {Notes.title}</h4>
@@ -50,4 +60,4 @@ function EditorCompennet({Notes,isClose,isShow,submitClose}) {
   )
 }
 
-export default EditorCompennet
+

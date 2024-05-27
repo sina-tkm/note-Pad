@@ -85,13 +85,7 @@ function HeaderComp(){
 
         {Edit.map(note=>{
         return( 
-        <EditorCompennet 
-        isShow = {isShow} 
-        key={note.id} 
-        Notes={note} 
-        submitClose={submitClose}
-        isClose={handleIsClose}
-        />
+        <EditorCompennet isShow = {isShow} key={note.id}  Notes={note} submitClose={submitClose}isClose={handleIsClose}/>
       )})}
         <CompNoteMaker
         onSort= {e=>setsortBy(e.target.value)}/>  

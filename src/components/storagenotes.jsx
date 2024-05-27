@@ -10,8 +10,6 @@ import { useDispatch, useNotes } from './contexts/notelist';
 
 
 function StorageNotes({onAddEdit,onchange,pull,handlePull}) {
-  
-
 const {sortBy} = useContext(NoteContext)
 const [open,setopen] =useState(null);
 const dispatch = useDispatch() 
@@ -74,7 +72,7 @@ export default StorageNotes
 
 
 function ListMarup({dyno,onOpen,open,onAddEdit,onChange}){
-  const dispatch = useDispatch()
+ 
   const isOpen = dyno.id === open
   const onEdit = ()=>{
   const storage = [{
@@ -83,11 +81,12 @@ function ListMarup({dyno,onOpen,open,onAddEdit,onChange}){
   id:dyno.id,
   date:dyno.createdAt
 }]
-
 onAddEdit(storage)
  }
+ const dispatch = useDispatch()
 
-    const option = {
+
+ const option = {
     year:"numeric",
     month:"short",
     day:"numeric"
@@ -96,12 +95,12 @@ onAddEdit(storage)
  
   
   return(
- <div  className={ `${isOpen ? "text__block-content":"text--block"}`} >
+ <div  className={ `${isOpen ? "text__block-content":"text--block"}`}>
   <div className="text--content">
     <div className='title--box'  onClick={()=>onOpen(dyno.id)}>
        <h3 className="title left">{dyno.title}</h3>
-      <ChevronDownIcon 
-      style={{
+       <ChevronDownIcon 
+        style={{
         height:"100%",
         display:"flex",
         alignItems:"center",
